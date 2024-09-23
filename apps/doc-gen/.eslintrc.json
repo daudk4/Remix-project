@@ -28,7 +28,9 @@
         "*.js",
         "*.jsx"
       ],
-      "rules": {}
+      "rules": {
+        "object-curly-spacing": "off"
+      }
     }
   ]
 }
