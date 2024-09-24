@@ -1,3 +1,7 @@
 {
-  "extends": "../../.eslintrc.json"
+  "extends": "../../.eslintrc.json",
+  "rules": {
+    "standard/no-callback-literal": "off",
+    "object-curly-spacing": "off"
+  }
 }
