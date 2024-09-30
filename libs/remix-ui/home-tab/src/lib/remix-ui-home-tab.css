@@ -82,7 +82,7 @@
 .remixui_home_envButton {
   width: 220px;
   cursor: pointer;
-  height: 130px;
+  height: 145px;
 }
 .remixui_home_workspaceTemplate {
   width: 220px;
@@ -91,7 +91,7 @@
 .remixui_home_media {
   overflow: hidden;
   max-width: 400px;
-  transition: .5s ease-out;
+  transition: 0.5s ease-out;
   z-index: 1000;
 }
 .remixui_home_migrationBtn {

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useRef, useContext } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import React, {useEffect, useRef, useContext} from 'react'
+import {FormattedMessage, useIntl} from 'react-intl'
 import PluginButton from './pluginButton'
-import { ThemeContext } from '../themeContext'
+import {ThemeContext} from '../themeContext'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import CustomNavButtons from './customNavButtons'
@@ -17,7 +17,7 @@ interface HomeTabFeaturedPluginsProps {
   plugin: any
 }
 
-function HomeTabFeaturedPlugins({ plugin }: HomeTabFeaturedPluginsProps) {
+function HomeTabFeaturedPlugins({plugin}: HomeTabFeaturedPluginsProps) {
   const themeFilter = useContext(ThemeContext)
   const carouselRef = useRef<any>({})
   const carouselRefDiv = useRef(null)
@@ -84,11 +84,11 @@ function HomeTabFeaturedPlugins({ plugin }: HomeTabFeaturedPluginsProps) {
   }
 
   return (
-    <div className="pl-2 w-100 align-items-end remixui_featuredplugins_container" id="hTFeaturedPlugins">
-      <label className="" style={{ fontSize: '1.2rem' }}>
+    <div className="pl-2 w-100 h-100 align-items-end remixui_featuredplugins_container" id="hTFeaturedPlugins">
+      <label className="" style={{fontSize: '1.2rem'}}>
         <FormattedMessage id="home.featuredPlugins" />
       </label>
-      <div ref={carouselRefDiv} className="w-100 d-flex flex-column">
+      <div ref={carouselRefDiv} className="w-100  h-100 d-flex flex-column">
         <ThemeContext.Provider value={themeFilter}>
           <Carousel
             ref={carouselRef}
@@ -100,13 +100,13 @@ function HomeTabFeaturedPlugins({ plugin }: HomeTabFeaturedPluginsProps) {
             showDots={false}
             responsive={{
               superLargeDesktop: {
-                breakpoint: { max: 4000, min: 3000 },
-                items: itemsToShow
+                breakpoint: {max: 4000, min: 3000},
+                items: itemsToShow,
               },
               desktop: {
-                breakpoint: { max: 3000, min: 1024 },
-                items: itemsToShow
-              }
+                breakpoint: {max: 3000, min: 1024},
+                items: itemsToShow,
+              },
             }}
             renderButtonGroupOutside={true}
             ssr={false} // means to render carousel on server-side.
@@ -120,7 +120,7 @@ function HomeTabFeaturedPlugins({ plugin }: HomeTabFeaturedPluginsProps) {
               envID="staticAnalysisLogo"
               envText="Solidity Analyzers"
               description={intl.formatMessage({
-                id: 'home.codeAnalyizerPluginDesc'
+                id: 'home.codeAnalyizerPluginDesc',
               })}
               remixMaintained={true}
               callback={() => startCodeAnalyzer()}
@@ -130,35 +130,14 @@ function HomeTabFeaturedPlugins({ plugin }: HomeTabFeaturedPluginsProps) {
               envID="learnEthLogo"
               envText="LearnEth Tutorials"
               description={intl.formatMessage({
-                id: 'home.learnEthPluginDesc'
+                id: 'home.learnEthPluginDesc',
               })}
               remixMaintained={true}
               callback={() => startLearnEth()}
             />
-            <PluginButton
-              imgPath="assets/img/cookbook.webp"
-              envID="cookbookLogo"
-              envText="Cookbook"
-              description={intl.formatMessage({ id: 'home.cookbookDesc' })}
-              remixMaintained={false}
-              callback={() => startCookbook()}
-            />
-            <PluginButton
-              imgPath="assets/img/solidityLogo.webp"
-              envID="solidityLogo"
-              envText="Solidity"
-              description={intl.formatMessage({ id: 'home.solidityPluginDesc' })}
-              remixMaintained={true}
-              callback={() => startSolidity()}
-            />
-            <PluginButton
-              imgPath="assets/img/unitTesting.webp"
-              envID="sUTLogo"
-              envText="Solidity unit testing"
-              description={intl.formatMessage({ id: 'home.unitTestPluginDesc' })}
-              remixMaintained={true}
-              callback={() => startSolidityUnitTesting()}
-            />
+            <PluginButton imgPath="assets/img/cookbook.webp" envID="cookbookLogo" envText="Cookbook" description={intl.formatMessage({id: 'home.cookbookDesc'})} remixMaintained={false} callback={() => startCookbook()} />
+            <PluginButton imgPath="assets/img/solidityLogo.webp" envID="solidityLogo" envText="Solidity" description={intl.formatMessage({id: 'home.solidityPluginDesc'})} remixMaintained={true} callback={() => startSolidity()} />
+            <PluginButton imgPath="assets/img/unitTesting.webp" envID="sUTLogo" envText="Solidity unit testing" description={intl.formatMessage({id: 'home.unitTestPluginDesc'})} remixMaintained={true} callback={() => startSolidityUnitTesting()} />
           </Carousel>
         </ThemeContext.Provider>
       </div>
