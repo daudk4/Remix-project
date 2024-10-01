@@ -31,7 +31,7 @@ export class MyTab extends ViewPlugin {
         <div className="pt-2 flex">
           <p className="mb-1">Generate random number</p>
           <button className="p-1 bg-primary rounded-5" onClick={this.clicked}>
-            Click me
+            <h1>Click</h1>
           </button>
         </div>
       </div>
