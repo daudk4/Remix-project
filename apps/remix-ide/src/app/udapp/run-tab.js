@@ -23,19 +23,7 @@ const profile = {
   maintainedBy: 'Remix',
   permission: true,
   events: ['newTransaction'],
-  methods: [
-    'createVMAccount',
-    'sendTransaction',
-    'getAccounts',
-    'pendingTransactionsCount',
-    'getSettings',
-    'setEnvironmentMode',
-    'clearAllInstances',
-    'clearAllPinnedInstances',
-    'addInstance',
-    'addPinnedInstance',
-    'resolveContractAndAddInstance'
-  ]
+  methods: ['createVMAccount', 'sendTransaction', 'getAccounts', 'pendingTransactionsCount', 'getSettings', 'setEnvironmentMode', 'clearAllInstances', 'clearAllPinnedInstances', 'addInstance', 'addPinnedInstance', 'resolveContractAndAddInstance'],
 }
 
 export class RunTab extends ViewPlugin {
@@ -68,7 +56,7 @@ export class RunTab extends ViewPlugin {
       resolve({
         selectedAccount: this.REACT_API.accounts.selectedAccount,
         selectedEnvMode: this.REACT_API.selectExEnv,
-        networkEnvironment: this.REACT_API.networkName
+        networkEnvironment: this.REACT_API.networkName,
       })
     })
   }
@@ -138,7 +126,7 @@ export class RunTab extends ViewPlugin {
       'vm-mainnet-fork': 'Deploy to a fork of the Ethereum mainnet in the in-browser virtual machine.',
       'vm-sepolia-fork': 'Deploy to a fork of the Sepolia testnet in the in-browser virtual machine.',
       'vm-custom-fork': 'Deploy to a fork of a custom network in the in-browser virtual machine.',
-      'walletconnect': 'Deploy using WalletConnect.',
+      walletconnect: 'Deploy using WalletConnect.',
       'basic-http-provider': 'Deploy to a Custom local network.',
       'hardhat-provider': 'Deploy to the local Hardhat dev chain.',
       'ganache-provider': 'Deploy to the local Ganache dev chain.',
@@ -149,7 +137,9 @@ export class RunTab extends ViewPlugin {
       'injected-metamask-optimism': 'Deploy to Optimism through the Metamask browser extension.',
       'injected-metamask-arbitrum': 'Deploy to Arbitrum through the Metamask browser extension.',
       'injected-metamask-sepolia': 'Deploy to the Sepolia testnet through the Metamask browser extension.',
-      'injected-metamask-ephemery': 'Deploy to the Ephemery testnet through the Metamask browser extension.'
+      'injected-metamask-ephemery': 'Deploy to the Ephemery testnet through the Metamask browser extension.',
+      'injected-catena-testnet': 'Deploy to Optimism through the Metamask browser extension.',
+      'catena-testnet': 'Deploy to Catena through the Metamask browser extension.',
     }
 
     const logos = {
@@ -161,8 +151,8 @@ export class RunTab extends ViewPlugin {
       'injected-Brave Wallet': ['assets/img/brave.png'],
       'injected-Trust Wallet': ['assets/img/trust-wallet.png'],
       'hardhat-provider': ['assets/img/hardhat.png'],
-      'walletconnect': ['assets/img/Walletconnect-logo.png'],     
-      'foundry-provider': ['assets/img/foundry.png']
+      walletconnect: ['assets/img/Walletconnect-logo.png'],
+      'foundry-provider': ['assets/img/foundry.png'],
     }
 
     const addProvider = async (position, name, displayName, isInjected, isVM, fork = '', dataId = '', title = '', forkedVM = false) => {
@@ -187,10 +177,10 @@ export class RunTab extends ViewPlugin {
           }
         },
         provider: {
-          sendAsync (payload) {
+          sendAsync(payload) {
             return udapp.call(name, 'sendAsync', payload)
-          }
-        }
+          },
+        },
       })
     }
 
@@ -207,19 +197,23 @@ export class RunTab extends ViewPlugin {
 
       if (event.detail.info.name === 'MetaMask') {
         await addCustomInjectedProvider(7, event, 'injected-metamask-optimism', 'L2 - Optimism - ' + event.detail.info.name, '0xa', ['https://mainnet.optimism.io'])
-        await addCustomInjectedProvider(8, event, 'injected-metamask-arbitrum', 'L2 - Arbitrum - ' + event.detail.info.name, '0xa4b1', ['https://arb1.arbitrum.io/rpc'])    
-        await addCustomInjectedProvider(5, event, 'injected-metamask-sepolia', 'Sepolia Testnet - ' + event.detail.info.name, '0xaa36a7', [],
-          {
-            "name": "Sepolia ETH",
-            "symbol": "ETH",
-            "decimals": 18
-          })    
-        await addCustomInjectedProvider(9, event, 'injected-metamask-ephemery', 'Ephemery Testnet - ' + event.detail.info.name, '', ['https://otter.bordel.wtf/erigon', 'https://eth.ephemeral.zeus.fyi'],
-          {
-            "name": "Ephemery ETH",
-            "symbol": "ETH",
-            "decimals": 18
-          })
+        await addCustomInjectedProvider(8, event, 'injected-metamask-arbitrum', 'L2 - Arbitrum - ' + event.detail.info.name, '0xa4b1', ['https://arb1.arbitrum.io/rpc'])
+        await addCustomInjectedProvider(5, event, 'injected-metamask-sepolia', 'Sepolia Testnet - ' + event.detail.info.name, '0xaa36a7', [], {
+          name: 'Sepolia ETH',
+          symbol: 'ETH',
+          decimals: 18,
+        })
+        await addCustomInjectedProvider(9, event, 'injected-metamask-ephemery', 'Ephemery Testnet - ' + event.detail.info.name, '', ['https://otter.bordel.wtf/erigon', 'https://eth.ephemeral.zeus.fyi'], {
+          name: 'Ephemery ETH',
+          symbol: 'ETH',
+          decimals: 18,
+        })
+
+        await addCustomInjectedProvider(35, event, 'catena-testnet', 'Catena Testnet - ' + event.detail.info.name, '0x2328', ['https://consensus.testnet.cvm.creatachain.com/'], {
+          name: 'CTA',
+          symbol: 'CTA',
+          decimals: 18,
+        })
         /*
         await addCustomInjectedProvider(9, event, 'SKALE Chaos Testnet', '0x50877ed6', ['https://staging-v3.skalenodes.com/v1/staging-fast-active-bellatrix'],
           {
@@ -228,11 +222,12 @@ export class RunTab extends ViewPlugin {
             "decimals": 18
           })
         */
-      }      
+      }
     }
 
-    // VM    
+    // VM
     const titleVM = 'Execution environment is local to Remix.  Data is only saved to browser memory and will vanish upon reload.'
+
     await addProvider(1, 'vm-cancun', 'Remix VM (Cancun)', false, true, 'cancun', 'settingsVMCancunMode', titleVM)
     await addProvider(50, 'vm-shanghai', 'Remix VM (Shanghai)', false, true, 'shanghai', 'settingsVMShanghaiMode', titleVM)
     await addProvider(51, 'vm-paris', 'Remix VM (Paris)', false, true, 'paris', 'settingsVMParisMode', titleVM)
@@ -252,14 +247,11 @@ export class RunTab extends ViewPlugin {
     await addProvider(22, 'foundry-provider', 'Dev - Foundry Provider', false, false)
 
     // register injected providers
-    
-    window.addEventListener(
-      "eip6963:announceProvider",
-      (event) => {
-        registerInjectedProvider(event)
-      }
-    )
-    if (!isElectron()) window.dispatchEvent(new Event("eip6963:requestProvider"))
+
+    window.addEventListener('eip6963:announceProvider', (event) => {
+      registerInjectedProvider(event)
+    })
+    if (!isElectron()) window.dispatchEvent(new Event('eip6963:requestProvider'))
   }
 
   writeFile(fileName, content) {

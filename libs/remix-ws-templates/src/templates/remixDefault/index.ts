@@ -19,6 +19,18 @@ export default async () => {
     // @ts-ignore
     'tests/storage.test.js': (await import('!!raw-loader!./tests/storage.test.js')).default,
     // @ts-ignore
+    'mage_contracts/Context.sol': (await import('raw-loader!./mage_contracts/Context.sol')).default,
+    // @ts-ignore
+    'mage_contracts/ERC20.sol': (await import('raw-loader!./mage_contracts/ERC20.sol')).default,
+    // @ts-ignore
+    'mage_contracts/IERC20.sol': (await import('raw-loader!./mage_contracts/IERC20.sol')).default,
+    // @ts-ignore
+    'mage_contracts/IERC20Errors.sol': (await import('raw-loader!./mage_contracts/IERC20Errors.sol')).default,
+    // @ts-ignore
+    'mage_contracts/IERC20Metadata.sol': (await import('raw-loader!./mage_contracts/IERC20Metadata.sol')).default,
+    // @ts-ignore
+    'mage_contracts/SimpleERC20.sol': (await import('raw-loader!./mage_contracts/SimpleERC20.sol')).default,
+    // @ts-ignore
     'README.txt': (await import('raw-loader!./README.txt')).default,
     // @ts-ignore
     '.prettierrc.json': (await import('raw-loader!./.prettierrc')).default,
