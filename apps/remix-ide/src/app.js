@@ -79,6 +79,7 @@ const FileManager = require('./app/files/fileManager')
 import FileProvider from './app/files/fileProvider'
 import {appPlatformTypes} from '@remix-ui/app'
 import {MyTab} from './app/tabs/my-tab'
+import {ContractLookup} from './app/tabs/custom-contract-lookup'
 import {SecondTab} from './app/tabs/second-tab'
 const DGitProvider = require('./app/files/dgitProvider')
 const WorkspaceFileProvider = require('./app/files/workspaceFileProvider')
@@ -223,6 +224,9 @@ class AppComponent {
     ///----- customTab
     const myTab = new MyTab()
 
+    ///----- contractLookup
+    const contractLookup = new ContractLookup()
+
     ///----- secondTab
     const secondTab = new SecondTab()
 
@@ -366,6 +370,7 @@ class AppComponent {
       this.walkthroughService,
       search,
       myTab,
+      contractLookup,
       secondTab,
       solidityumlgen,
       compilationDetails,
@@ -465,7 +470,7 @@ class AppComponent {
     await this.appManager.activatePlugin(['hiddenPanel', 'pluginManager', 'codeParser', 'codeFormatter', 'fileDecorator', 'terminal', 'blockchain', 'fetchAndCompile', 'contentImport', 'gistHandler', 'compilerloader'])
     await this.appManager.activatePlugin(['settings'])
 
-    await this.appManager.activatePlugin(['walkthrough', 'storage', 'search', 'myTab', 'secondTab', 'compileAndRun', 'recorder', 'dgitApi', 'dgit'])
+    await this.appManager.activatePlugin(['walkthrough', 'storage', 'search', 'myTab','contract-lookup', 'secondTab', 'compileAndRun', 'recorder', 'dgitApi', 'dgit'])
     await this.appManager.activatePlugin(['solidity-script', 'remix-templates'])
 
     if (isElectron()) {

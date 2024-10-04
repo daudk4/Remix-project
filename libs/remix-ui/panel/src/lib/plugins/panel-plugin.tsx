@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 import React, {forwardRef, useEffect, useRef, useState} from 'react' // eslint-disable-line
-import { PluginRecord } from '../types'
+import {PluginRecord} from '../types'
 import './panel.css'
 interface panelPLuginProps {
-  pluginRecord: PluginRecord,
-  initialState?: any,
-  highlightStamp?: number,
+  pluginRecord: PluginRecord
+  initialState?: any
+  highlightStamp?: number
   children?: any
 }
 
@@ -24,11 +24,11 @@ const RemixUIPanelPlugin = (props: panelPLuginProps, panelRef: any) => {
           if (props.initialState) {
             let hasInitialProps = false
 
-            view = React.Children.map((props.pluginRecord.view.props as any).children, child => {
+            view = React.Children.map((props.pluginRecord.view.props as any).children, (child) => {
               if (React.isValidElement(child) && typeof child.type === 'function' && !hasInitialProps) {
                 hasInitialProps = true
                 // Safe to clone and pass `initialState`
-                return React.cloneElement(child, { ...props, initialState: props.initialState } as any)
+                return React.cloneElement(child, {...props, initialState: props.initialState} as any)
               }
               return child
             })

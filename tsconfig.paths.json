@@ -94,6 +94,9 @@
             "@remix-ui/search": [
               "libs/remix-ui/search/src/index.ts"
             ],
+            "@remix-ui/custom-contract-lookup": [
+              "libs/remix-ui/custom-contract-lookup/src/index.ts"
+            ],
             "@remix-ui/settings": [
               "libs/remix-ui/settings/src/index.ts"
             ],

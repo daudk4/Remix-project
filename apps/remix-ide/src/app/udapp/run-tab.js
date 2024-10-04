@@ -120,6 +120,7 @@ export class RunTab extends ViewPlugin {
     const descriptions = {
       'vm-cancun': 'Deploy to the in-browser virtual machine running the Cancun fork.',
       'vm-shanghai': 'Deploy to the in-browser virtual machine running the Shanghai fork.',
+      'vm-catena': 'Deploy to the in-browser virtual machine running the Catena fork.',
       'vm-paris': 'Deploy to the in-browser virtual machine running the Paris fork.',
       'vm-london': 'Deploy to the in-browser virtual machine running the London fork.',
       'vm-berlin': 'Deploy to the in-browser virtual machine running the Berlin fork.',
@@ -177,7 +178,7 @@ export class RunTab extends ViewPlugin {
           }
         },
         provider: {
-          sendAsync(payload) {
+          sendAsync(payload) { 
             return udapp.call(name, 'sendAsync', payload)
           },
         },
@@ -231,7 +232,7 @@ export class RunTab extends ViewPlugin {
     await addProvider(1, 'vm-cancun', 'Remix VM (Cancun)', false, true, 'cancun', 'settingsVMCancunMode', titleVM)
     await addProvider(50, 'vm-shanghai', 'Remix VM (Shanghai)', false, true, 'shanghai', 'settingsVMShanghaiMode', titleVM)
     await addProvider(51, 'vm-paris', 'Remix VM (Paris)', false, true, 'paris', 'settingsVMParisMode', titleVM)
-    await addProvider(52, 'vm-london', 'Remix VM (London)', false, true, 'london', 'settingsVMLondonMode', titleVM)
+    await addProvider(52, 'vm-london', 'Creatachain VM (catena)', false, true, 'london', 'settingsVMLondonMode', titleVM)
     await addProvider(53, 'vm-berlin', 'Remix VM (Berlin)', false, true, 'berlin', 'settingsVMBerlinMode', titleVM)
     await addProvider(2, 'vm-mainnet-fork', 'Remix VM - Mainnet fork', false, true, 'cancun', 'settingsVMMainnetMode', titleVM, true)
     await addProvider(3, 'vm-sepolia-fork', 'Remix VM - Sepolia fork', false, true, 'cancun', 'settingsVMSepoliaMode', titleVM, true)
